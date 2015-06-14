@@ -195,6 +195,20 @@ public class RCTree {
         }
     }
 
+    /*
+     * expected time = O(\log n)
+     */
+    public int getRoot(int vertex) {
+        while (true) {
+            final List<Cell> list = getCellsListForVertex(vertex);
+            final Cell lastCell = list.get(list.size() - 1);
+            if (lastCell.parent == vertex) {
+                return vertex;
+            }
+            vertex = lastCell.parent;
+        }
+    }
+
     public Cell getCell(int vertex, int layer) {
         if (vertexStatus[vertex].size() > layer) {
             return vertexStatus[vertex].get(layer);
